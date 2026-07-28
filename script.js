@@ -93,8 +93,120 @@ revealSections();
 
 
 /* ==========================================
-   IMAGE LIGHTBOX
+   ADVANCED LIGHTBOX
 ========================================== */
+
+const images = document.querySelectorAll(".gallery-item img");
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+const closeBtn = document.getElementById("close");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+const zoomIn = document.getElementById("zoom-in");
+const zoomOut = document.getElementById("zoom-out");
+
+let current = 0;
+let scale = 1;
+
+function openImage(index){
+
+    current = index;
+
+    scale = 1;
+
+    lightbox.style.display = "flex";
+
+    lightboxImg.src = images[current].src;
+
+    lightboxImg.style.transform = "scale(1)";
+}
+
+images.forEach((img,index)=>{
+
+    img.addEventListener("click",()=>{
+
+        openImage(index);
+
+    });
+
+});
+
+function updateImage(){
+
+    scale = 1;
+
+    lightboxImg.src = images[current].src;
+
+    lightboxImg.style.transform="scale(1)";
+
+}
+
+nextBtn.onclick=()=>{
+
+    current=(current+1)%images.length;
+
+    updateImage();
+
+}
+
+prevBtn.onclick=()=>{
+
+    current=(current-1+images.length)%images.length;
+
+    updateImage();
+
+}
+
+closeBtn.onclick=()=>{
+
+    lightbox.style.display="none";
+
+}
+
+lightbox.onclick=(e)=>{
+
+    if(e.target===lightbox){
+
+        lightbox.style.display="none";
+
+    }
+
+}
+
+zoomIn.onclick=()=>{
+
+    scale+=0.2;
+
+    lightboxImg.style.transform=`scale(${scale})`;
+
+}
+
+zoomOut.onclick=()=>{
+
+    if(scale>0.4){
+
+        scale-=0.2;
+
+    }
+
+    lightboxImg.style.transform=`scale(${scale})`;
+
+}
+
+document.addEventListener("keydown",(e)=>{
+
+    if(lightbox.style.display!=="flex") return;
+
+    if(e.key==="ArrowRight") nextBtn.click();
+
+    if(e.key==="ArrowLeft") prevBtn.click();
+
+    if(e.key==="Escape") closeBtn.click();
+
+});
 
 const galleryItems = document.querySelectorAll(".gallery-item img");
 
