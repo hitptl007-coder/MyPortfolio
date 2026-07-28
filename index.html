@@ -3,75 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Portfolio</title>
+    <title>Hitendra Patel | YouTube Thumbnail Designer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Remix Icons -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <h1>Your Name</h1>
-    <p>Aspiring Software Developer</p>
-</header>
+<!--==================== PRELOADER ====================-->
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+<div id="loader">
+    <div class="loader-circle"></div>
+</div>
+
+<!--==================== NAVBAR ====================-->
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+
+Hitendra<span>.</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#portfolio">Portfolio</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+<div class="menu-btn">
+
+<i class="ri-menu-3-line"></i>
+
+</div>
+
 </nav>
 
+</header>
+
+<!--==================== HERO ====================-->
+
+<section id="home" class="hero">
+
+<div class="hero-bg"></div>
+
+<div class="hero-content">
+
+<h3>Hello, I'm</h3>
+
+<h1>Hitendra Patel</h1>
+
+<h2>YouTube Thumbnail Designer | Creative Visual Storytelling</h2>
+
+<p>
+
+I create high-converting YouTube thumbnails for
+<strong>Gaming</strong>,
+<strong>Documentaries</strong>,
+<strong>Finance</strong>,
+<strong>Tech</strong>,
+and creators who want more views and a higher click-through rate (CTR).
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#portfolio" class="btn primary">
+
+View My Work
+
+</a>
+
+<a href="#contact" class="btn secondary">
+
+Hire Me
+
+</a>
+
+</div>
+
+</div>
+
+<div class="floating-images">
+
+<div class="thumb thumb1">
+<img src="assets/thumbnails/thumb1.jpg" alt="">
+</div>
+
+<div class="thumb thumb2">
+<img src="assets/thumbnails/thumb2.jpg" alt="">
+</div>
+
+<div class="thumb thumb3">
+<img src="assets/thumbnails/thumb3.jpg" alt="">
+</div>
+
+<div class="thumb thumb4">
+<img src="assets/thumbnails/thumb4.jpg" alt="">
+</div>
+
+</div>
+
+</section>
+
+<!--==================== ABOUT ====================-->
+
 <section id="about">
-    <h2>About Me</h2>
-    <p>
-        Hello! I'm a passionate programmer who enjoys building web
-        applications and solving real-world problems. I'm currently
-        learning full-stack development and improving my programming skills.
-    </p>
+
+<div class="section-title">
+
+<h2>About Me</h2>
+
+</div>
+
+<div class="about-content">
+
+<p>
+
+Hi, I'm <strong>Hitendra Patel</strong>.
+
+I specialize in designing eye-catching YouTube thumbnails
+that help creators capture attention and present their content professionally.
+
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<i class="ri-time-line"></i>
+
+<span>Fast Delivery</span>
+
+</div>
+
+<div class="feature">
+
+<i class="ri-star-smile-line"></i>
+
+<span>Professional Quality</span>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="skills">
-    <h2>Skills</h2>
+<!--==================== PORTFOLIO ====================-->
 
-    <div class="cards">
-        <div class="card">HTML</div>
-        <div class="card">CSS</div>
-        <div class="card">JavaScript</div>
-        <div class="card">Python</div>
-        <div class="card">Java</div>
-        <div class="card">Git & GitHub</div>
-    </div>
+<section id="portfolio">
+
+<div class="section-title">
+
+<h2>Featured Work</h2>
+
+<p>Some of my recent thumbnail designs.</p>
+
+</div>
+
+<div class="gallery">
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb1.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb2.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb3.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb4.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb5.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb6.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb7.jpg" alt="">
+</div>
+
+<div class="gallery-item">
+<img src="assets/thumbnails/thumb8.jpg" alt="">
+</div>
+
+</div>
+
 </section>
 
-<section id="projects">
-    <h2>Projects</h2>
+<!--==================== TESTIMONIAL ====================-->
 
-    <div class="project">
-        <h3>Portfolio Website</h3>
-        <p>Personal portfolio hosted using GitHub Pages.</p>
-    </div>
+<section id="testimonial">
 
-    <div class="project">
-        <h3>Weather App</h3>
-        <p>Weather application using a public API.</p>
-    </div>
+<div class="section-title">
 
-    <div class="project">
-        <h3>Student Management System</h3>
-        <p>Java project for managing student records.</p>
-    </div>
+<h2>Testimonials</h2>
+
+</div>
+
+<div class="testimonial-card">
+
+<i class="ri-double-quotes-l"></i>
+
+<p>
+
+Currently building my portfolio and excited to work
+with creators who value quality design.
+
+</p>
+
+</div>
+
 </section>
+
+<!--==================== PRICING ====================-->
+
+<section id="pricing">
+
+<div class="section-title">
+
+<h2>Pricing</h2>
+
+</div>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+
+<h3>Starter</h3>
+
+<h1>$10</h1>
+
+<ul>
+
+<li>1 Thumbnail</li>
+<li>2 Revisions</li>
+<li>24–48 Hour Delivery</li>
+<li>High Quality Design</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+
+Choose Plan
+
+</a>
+
+</div>
+
+<div class="price-card featured">
+
+<h3>Professional</h3>
+
+<h1>$45</h1>
+
+<ul>
+
+<li>5 Thumbnails</li>
+<li>4 Revisions Per Thumbnail</li>
+<li>Priority Delivery</li>
+<li>Consistent Design Style</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+
+Choose Plan
+
+</a>
+
+</div>
+
+<div class="price-card">
+
+<h3>Premium</h3>
+
+<h1>Custom</h1>
+
+<ul>
+
+<li>Monthly Package</li>
+<li>Unlimited Revisions</li>
+<li>Dedicated Design Support</li>
+<li>Priority Delivery</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+
+Let's Talk
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!--==================== CONTACT ====================-->
 
 <section id="contact">
-    <h2>Contact</h2>
 
-    <p>Email: your@email.com</p>
-    <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
+<div class="section-title">
+
+<h2>Let's Work Together</h2>
+
+</div>
+
+<div class="contact-box">
+
+<a href="mailto:your@email.com">
+
+<i class="ri-mail-line"></i>
+
+your@email.com
+
+</a>
+
+<a href="#">
+
+<i class="ri-linkedin-box-fill"></i>
+
+LinkedIn
+
+</a>
+
+</div>
+
 </section>
 
+<!--==================== FOOTER ====================-->
+
 <footer>
-    <p>© 2026 Your Name</p>
+
+<p>
+
+© 2026 Hitendra Patel • YouTube Thumbnail Designer
+
+</p>
+
 </footer>
+
+<!--==================== LIGHTBOX ====================-->
+
+<div id="lightbox">
+
+<span id="close">
+
+<i class="ri-close-line"></i>
+
+</span>
+
+<img id="lightbox-img">
+
+</div>
+
+<button id="topBtn">
+
+<i class="ri-arrow-up-line"></i>
+
+</button>
 
 <script src="script.js"></script>
 
