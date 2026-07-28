@@ -551,8 +551,9 @@ color:#38BDF8;
 
 .gallery-item img{
     width:100%;
+    height:auto;
     display:block;
-    transition:.5s;
+    border-radius:20px;
 }
 
 .gallery-item:hover{
