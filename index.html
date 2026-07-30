@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Hitendra Patel | YouTube Thumbnail Designer</title>
+
+  <meta
+    name="description"
+    content="Professional YouTube thumbnail designer creating eye-catching thumbnails for gaming, documentaries, finance, tech, and content creators."
+  />
+
+  <meta
+    name="keywords"
+    content="YouTube thumbnail designer, thumbnail designer, YouTube thumbnails, Hitendra Patel, gaming thumbnails, finance thumbnails, tech thumbnails"
+  />
+
+  <meta name="author" content="Hitendra Patel" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hitendra Patel | YouTube Thumbnail Designer" />
+  <meta
+    property="og:description"
+    content="Professional YouTube thumbnail designer creating scroll-stopping thumbnails that drive clicks."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-preview.jpg" />
+
+  <meta name="theme-color" content="#070712" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #070712;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    a {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: #7c3cff;
+      color: white;
+    }
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --bg: #070712;
+      --bg-2: #0c0c1b;
+      --card: rgba(255, 255, 255, 0.055);
+      --card-border: rgba(255, 255, 255, 0.11);
+
+      --blue: #25a8ff;
+      --purple: #8a3ffc;
+      --pink: #d946ef;
+
+      --text: #ffffff;
+      --muted: #a7a7bd;
+
+      --radius: 24px;
+    }
+
+    /* =========================================================
+       SCROLL PROGRESS
+    ========================================================= */
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      z-index: 9999;
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+      );
+      box-shadow:
+        0 0 10px var(--blue),
+        0 0 20px var(--purple);
+    }
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 10% 20%,
+          rgba(37, 168, 255, 0.09),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(138, 63, 252, 0.1),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(217, 70, 239, 0.06),
+          transparent 35%
+        ),
+        var(--bg);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: floatOrb 10s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 350px;
+      height: 350px;
+      background: #1877ff;
+      left: -120px;
+      top: 15%;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: #7525ff;
+      right: -150px;
+      top: 30%;
+      animation-delay: -3s;
+    }
+
+    .orb-3 {
+      width: 300px;
+      height: 300px;
+      background: #d32dff;
+      left: 35%;
+      bottom: -150px;
+      animation-delay: -6s;
+    }
+
+    @keyframes floatOrb {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(40px, -40px) scale(1.15);
+      }
+    }
+
+    /* =========================================================
+       CURSOR GLOW
+    ========================================================= */
+
+    .cursor-glow {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(
+        circle,
+        rgba(37, 168, 255, 0.12),
+        rgba(138, 63, 252, 0.05) 35%,
+        transparent 70%
+      );
+      filter: blur(5px);
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 5%;
+      transition: 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(7, 7, 18, 0.78);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #bcbcd0;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple)
+      );
+      border-radius: 10px;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* =========================================================
+       GENERAL
+    ========================================================= */
+
+    section {
+      width: 100%;
+      padding: 120px 5%;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 55px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 23px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple)
+      );
+      box-shadow:
+        0 10px 35px rgba(37, 168, 255, 0.18),
+        0 0 30px rgba(138, 63, 252, 0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 15px 45px rgba(37, 168, 255, 0.3),
+        0 0 35px rgba(138, 63, 252, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(15px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 150px;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bdbddd;
+      font-size: 0.78rem;
+      margin-bottom: 22px;
+      backdrop-filter: blur(15px);
+    }
+
+    .hero-badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #42ff8c;
+      box-shadow: 0 0 12px #42ff8c;
+    }
+
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 0.94;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        100deg,
+        #ffffff,
+        var(--blue),
+        var(--purple),
+        #ffffff
+      );
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientMove 8s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0%;
+      }
+
+      50% {
+        background-position: 100%;
+      }
+
+      100% {
+        background-position: 0%;
+      }
+    }
+
+    .hero h2 {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: #b5b5c9;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 1.05rem;
+    }
+
+    /* =========================================================
+       FLOATING CARDS
+    ========================================================= */
+
+    .floating-card {
+      position: absolute;
+      width: 210px;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+      opacity: 0.65;
+      animation: floatingCard 7s ease-in-out infinite;
+    }
+
+    .floating-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .floating-card-1 {
+      right: 8%;
+      top: 23%;
+      transform: rotate(8deg);
+    }
+
+    .floating-card-2 {
+      right: 2%;
+      bottom: 20%;
+      transform: rotate(-7deg);
+      animation-delay: -3s;
+    }
+
+    .floating-card-3 {
+      right: 27%;
+      bottom: 9%;
+      width: 150px;
+      transform: rotate(5deg);
+      animation-delay: -5s;
+    }
+
+    @keyframes floatingCard {
+      0%,
+      100% {
+        margin-top: 0;
+      }
+
+      50% {
+        margin-top: -20px;
+      }
+    }
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-card {
+      padding: 40px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+    }
+
+    .about-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: #dedeee;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: rgba(37, 168, 255, 0.1);
+      color: var(--blue);
+    }
+
+    /* =========================================================
+       PORTFOLIO
+    ========================================================= */
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: #111120;
+      opacity: 1;
+      transform: translateY(0);
+      transition: 0.4s ease;
+    }
+
+    .portfolio-item.hidden {
+      display: none;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      background: linear-gradient(
+        transparent 30%,
+        rgba(0, 0, 0, 0.85)
+      );
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-7px);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(37, 168, 255, 0.08);
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.07);
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-overlay span {
+      font-weight: 700;
+    }
+
+    .load-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    /* =========================================================
+       BEFORE / AFTER
+    ========================================================= */
+
+    .comparison {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .comparison-box {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      user-select: none;
+    }
+
+    .comparison img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .after-image {
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .comparison-label {
+      position: absolute;
+      top: 20px;
+      z-index: 4;
+      padding: 7px 13px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .before-label {
+      left: 20px;
+    }
+
+    .after-label {
+      right: 20px;
+    }
+
+    .comparison-slider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: white;
+      z-index: 5;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .comparison-slider::before {
+      content: "↔";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      color: black;
+      font-weight: 900;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .comparison-range {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+
+    /* =========================================================
+       TESTIMONIAL
+    ========================================================= */
+
+    .testimonial {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      padding: 60px 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: linear-gradient(
+        135deg,
+        rgba(37, 168, 255, 0.06),
+        rgba(138, 63, 252, 0.08)
+      );
+      backdrop-filter: blur(20px);
+    }
+
+    .quote {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .testimonial small {
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       PRICING
+    ========================================================= */
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .pricing-card {
+      position: relative;
+      padding: 35px;
+      border-radius: 24px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      transition: 0.4s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(37, 168, 255, 0.35);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(37, 168, 255, 0.35);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(37, 168, 255, 0.09),
+          rgba(138, 63, 252, 0.1)
+        ),
+        var(--card);
+    }
+
+    .popular {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 5px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 99px;
+      background: rgba(37, 168, 255, 0.12);
+      color: var(--blue);
+    }
+
+    .pricing-card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .price.custom {
+      font-size: 2rem;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: #bdbdce;
+    }
+
+    .pricing-card li {
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .pricing-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #51e6a4;
+    }
+
+    .addons {
+      margin-top: 35px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .addons strong {
+      color: white;
+    }
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact-card {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 40px;
+      border-radius: 30px;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(37, 168, 255, 0.13),
+          transparent 45%
+        ),
+        rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+    }
+
+    .contact-card h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: auto auto 30px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.3s;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37, 168, 255, 0.4);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 35px 5%;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: #77778c;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* =========================================================
+       LIGHTBOX
+    ========================================================= */
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(3, 3, 10, 0.94);
+      backdrop-filter: blur(18px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      width: min(90vw, 1100px);
+      height: min(85vh, 750px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+      cursor: grab;
+    }
+
+    .lightbox-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 14px;
+      background: rgba(20, 20, 35, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      z-index: 10;
+    }
+
+    .lightbox-btn {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.07);
+      color: white;
+      font-size: 1.1rem;
+      transition: 0.2s;
+    }
+
+    .lightbox-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.07);
+      color: white;
+      font-size: 1.5rem;
+      z-index: 20;
+    }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: rgba(255, 255, 255, 0.07);
+      color: white;
+      font-size: 1.4rem;
+      z-index: 20;
+    }
+
+    .lightbox-prev {
+      left: 25px;
+    }
+
+    .lightbox-next {
+      right: 25px;
+    }
+
+    /* =========================================================
+       BACK TO TOP
+    ========================================================= */
+
+    .back-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(20, 20, 35, 0.8);
+      color: white;
+      backdrop-filter: blur(15px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: 0.3s;
+      z-index: 900;
+    }
+
+    .back-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       SCROLL ANIMATION
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 900px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-card-1 {
+        right: 4%;
+      }
+
+      .floating-card-2 {
+        right: -2%;
+      }
+
+      .floating-card-3 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      section {
+        padding: 85px 5%;
+      }
+
+      header {
+        padding: 15px 5%;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 75px;
+        left: 5%;
+        right: 5%;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 15px;
+        border-radius: 18px;
+        background: rgba(12, 12, 27, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 13px;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 140px;
+        padding-bottom: 100px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .floating-card {
+        display: none;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card {
+        padding: 28px;
+      }
+
+      .pricing-card {
+        padding: 28px;
+      }
+
+      .contact-card {
+        padding: 50px 22px;
+      }
+
+      .lightbox-arrow {
+        width: 42px;
+        height: 42px;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
+
+      .cursor-glow {
+        display: none;
+      }
+    }
+
+    @media (pointer: coarse) {
+      .cursor-glow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
+
+  <div class="background">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="scroll-progress"></div>
+  <div class="cursor-glow"></div>
+
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
+  <header id="header">
+    <nav class="nav">
+
+      <a href="#home" class="logo">
+        Hitendra<span>.</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#comparison">Before / After</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero" id="home">
+
+      <!-- Floating portfolio cards -->
+      <div class="floating-card floating-card-1">
+        <img
+          src="assets/thumbnails/T1.jpg"
+          alt="Gaming YouTube thumbnail design"
+        />
+      </div>
+
+      <div class="floating-card floating-card-2">
+        <img
+          src="assets/thumbnails/T3.png"
+          alt="Finance YouTube thumbnail design"
+        />
+      </div>
+
+      <div class="floating-card floating-card-3">
+        <img
+          src="assets/thumbnails/T4.png"
+          alt="Technology YouTube thumbnail design"
+        />
+      </div>
+
+      <div class="container">
+
+        <div class="hero-content reveal">
+
+          <div class="hero-badge">
+            <span></span>
+            Available for new projects
+          </div>
+
+          <h1>
+            Scroll-Stopping
+            <span class="gradient-text">Thumbnails</span>
+            That Drive Clicks
+          </h1>
+
+          <h2>
+            YouTube Thumbnail Designer | Creative Visual Storytelling
+          </h2>
+
+          <p class="hero-description">
+            I create high-converting YouTube thumbnails for gaming,
+            documentaries, finance, tech, and creators who want more
+            views and a higher click-through rate.
+          </p>
+
+          <div class="buttons">
+
+            <a href="#portfolio" class="btn btn-primary">
+              🚀 View My Work
+            </a>
+
+            <a href="#contact" class="btn btn-secondary">
+              📩 Hire Me
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <div class="eyebrow">About Me</div>
+
+          <h2>
+            Design built to
+            <span class="gradient-text">get attention.</span>
+          </h2>
+
+          <p>
+            Clean visuals, strong composition, and attention-grabbing
+            storytelling designed specifically for YouTube.
+          </p>
+        </div>
+
+        <div class="about-grid">
+
+          <div class="about-card reveal">
+
+            <h3>Hi, I'm Hitendra Patel 👋</h3>
+
+            <p>
+              I specialize in designing eye-catching YouTube thumbnails
+              that help creators capture attention and present their
+              content professionally.
+            </p>
+
+            <ul class="check-list">
+              <li>Fast Delivery</li>
+              <li>Professional Quality</li>
+              <li>Creative Visual Storytelling</li>
+              <li>Creator-Focused Design</li>
+            </ul>
+
+          </div>
+
+          <div class="about-card reveal">
+
+            <div class="eyebrow">My Goal</div>
+
+            <h3>
+              Make your video impossible to ignore.
+            </h3>
+
+            <p>
+              Every thumbnail should communicate the video's idea
+              instantly while creating enough curiosity to earn the
+              click.
+            </p>
+
+            <a href="#portfolio" class="btn btn-primary">
+              Explore My Work
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         PORTFOLIO
+    ====================================================== -->
+
+    <section id="portfolio">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="eyebrow">Portfolio</div>
+
+          <h2>
+            Work that
+            <span class="gradient-text">speaks visually.</span>
+          </h2>
+
+          <p>
+            A selection of thumbnail concepts across different
+            content categories.
+          </p>
+
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+
+          <!--
+            IMPORTANT:
+            Replace these images with your own.
+
+            To add another image:
+            1. Copy a portfolio-item
+            2. Change the image path
+            3. Change the alt text
+            4. Change data-title
+          -->
+
+          <div
+            class="portfolio-item reveal"
+            data-title="Gaming Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T4.png"
+              alt="Gaming YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Gaming Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item reveal"
+            data-title="Finance Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T3.png"
+              alt="Finance YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Finance Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item reveal"
+            data-title="Tech Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T5.jpg"
+              alt="Technology YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Tech Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item reveal"
+            data-title="Documentary Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T1.jpg"
+              alt="Documentary YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Documentary Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item hidden reveal"
+            data-title="AI Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T2.png"
+              alt="AI YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>AI Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item hidden reveal"
+            data-title="Business Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T6.png"
+              alt="Business YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Business Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item hidden reveal"
+            data-title="Gaming Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T7.png"
+              alt="Gaming YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Gaming Thumbnail</span>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-item hidden reveal"
+            data-title="Documentary Thumbnail"
+          >
+            <img
+              src="assets/thumbnails/T8.png"
+              alt="Documentary YouTube thumbnail design"
+            />
+            <div class="portfolio-overlay">
+              <span>Documentary Thumbnail</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="load-more-wrap">
+
+          <button
+            class="btn btn-secondary"
+            id="loadMore"
+          >
+            Load More
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         BEFORE / AFTER
+    ====================================================== -->
+
+    <section id="comparison">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="eyebrow">Before & After</div>
+
+          <h2>
+            From ordinary to
+            <span class="gradient-text">click-worthy.</span>
+          </h2>
+
+          <p>
+            ORIGINAL | REDESIGNED
+          </p>
+
+        </div>
+
+        <div class="comparison reveal">
+
+          <div class="comparison-box">
+
+            <!-- BEFORE -->
+            <img
+              src="assets/before/Before.png"
+              alt="Original YouTube thumbnail before redesign"
+            />
+
+            <!-- AFTER -->
+            <img
+              class="after-image"
+              id="afterImage"
+              src="assets/after/After.png"
+              alt="Redesigned YouTube thumbnail after redesign"
+            />
+
+            <span class="comparison-label before-label">
+              ORIGINAL
+            </span>
+
+            <span class="comparison-label after-label">
+              REDESIGNED
+            </span>
+
+            <div
+              class="comparison-slider"
+              id="comparisonSlider"
+            ></div>
+
+            <input
+              class="comparison-range"
+              id="comparisonRange"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              aria-label="Before and after comparison"
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         TESTIMONIAL
+    ====================================================== -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="testimonial reveal">
+
+          <div class="eyebrow">
+            Client Feedback
+          </div>
+
+          <div class="quote">
+            “Currently building my portfolio and excited to work
+            with creators who value quality design.”
+          </div>
+
+          <small>
+            — Hitendra Patel
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         PRICING
+    ====================================================== -->
+
+    <section id="pricing">
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="eyebrow">Pricing</div>
+
+          <h2>
+            Simple pricing.
+            <span class="gradient-text">Clear value.</span>
+          </h2>
+
+          <p>
+            Choose a package that fits the amount of content
+            you're creating.
+          </p>
+
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- STARTER -->
+          <div class="pricing-card reveal">
+
+            <h3>🟢 Starter</h3>
+
+            <div class="price">
+              ₹999
+            </div>
+
+            <ul>
+              <li>1 Thumbnail</li>
+              <li>2 Revisions</li>
+              <li>High-Quality Design</li>
+              <li>Delivery within 24–48 Hours</li>
+            </ul>
+
+          </div>
+
+          <!-- PROFESSIONAL -->
+          <div class="pricing-card featured reveal">
+
+            <div class="popular">
+              MOST POPULAR
+            </div>
+
+            <h3>🔵 Professional</h3>
+
+            <div class="price">
+              ₹3,999
+            </div>
+
+            <ul>
+              <li>5 Thumbnails</li>
+              <li>3 Revisions per Thumbnail</li>
+              <li>Consistent Design Style</li>
+              <li>Priority Delivery</li>
+            </ul>
+
+          </div>
+
+          <!-- PREMIUM -->
+          <div class="pricing-card reveal">
+
+            <h3>🟣 Premium</h3>
+
+            <div class="price custom">
+              Custom
+            </div>
+
+            <ul>
+              <li>Specialized Plan</li>
+              <li>Dedicated Design Support</li>
+              <li>Priority Delivery</li>
+              <li>Custom Requirements</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div class="addons reveal">
+
+          <p>
+            Optional Add-ons:
+            <strong>Express Delivery — Within 12 Hours: +₹500</strong>
+            &nbsp; • &nbsp;
+            <strong>Extra Revision: +₹200</strong>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-card reveal">
+
+          <div class="eyebrow">
+            Let's Work Together
+          </div>
+
+          <h2>
+            Have a video?
+            <br />
+            <span class="gradient-text">
+              Let's make it click.
+            </span>
+          </h2>
+
+          <p>
+            Make your content stand out with a professional
+            YouTube thumbnail designed to grab attention.
+          </p>
+
+          <div class="contact-links">
+
+            <a
+              class="contact-link"
+              href="mailto:hitptl007@gmail.com"
+            >
+              📧 hitptl007@gmail.com
+            </a>
+
+            <a
+              class="contact-link"
+              href="https://www.linkedin.com/in/hitendra-patel-531636425"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              💼 LinkedIn
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+    © 2026 Hitendra Patel. All rights reserved.
+  </footer>
+
+  <!-- =======================================================
+       LIGHTBOX
+  ======================================================== -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    aria-hidden="true"
+  >
+
+    <button
+      class="lightbox-close"
+      id="lightboxClose"
+      aria-label="Close image preview"
+    >
+      ×
+    </button>
+
+    <button
+      class="lightbox-arrow lightbox-prev"
+      id="lightboxPrev"
+      aria-label="Previous image"
+    >
+      ‹
+    </button>
+
+    <div class="lightbox-content">
+
+      <img
+        class="lightbox-image"
+        id="lightboxImage"
+        src=""
+        alt=""
+      />
+
+    </div>
+
+    <button
+      class="lightbox-arrow lightbox-next"
+      id="lightboxNext"
+      aria-label="Next image"
+    >
+      ›
+    </button>
+
+    <div class="lightbox-controls">
+
+      <button
+        class="lightbox-btn"
+        id="zoomOut"
+        aria-label="Zoom out"
+      >
+        −
+      </button>
+
+      <button
+        class="lightbox-btn"
+        id="zoomReset"
+        aria-label="Reset zoom"
+      >
+        1×
+      </button>
+
+      <button
+        class="lightbox-btn"
+        id="zoomIn"
+        aria-label="Zoom in"
+      >
+        +
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- =======================================================
+       BACK TO TOP
+  ======================================================== -->
+
+  <button
+    class="back-top"
+    id="backTop"
+    aria-label="Back to top"
+  >
+    ↑
+  </button>
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =======================================================
+       MOBILE NAVIGATION
+    ======================================================== */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+
+    });
+
+
+    /* =======================================================
+       HEADER SCROLL EFFECT
+    ======================================================== */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* =======================================================
+       SCROLL PROGRESS
+    ======================================================== */
+
+    const progress = document.querySelector(".scroll-progress");
+
+    window.addEventListener("scroll", () => {
+
+      const scrollTop = window.scrollY;
+
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+      const percentage =
+        (scrollTop / documentHeight) * 100;
+
+      progress.style.width = percentage + "%";
+
+    });
+
+
+    /* =======================================================
+       CURSOR GLOW
+    ======================================================== */
+
+    const cursorGlow =
+      document.querySelector(".cursor-glow");
+
+    if (
+      window.matchMedia("(pointer: fine)").matches
+    ) {
+
+      document.addEventListener("mousemove", e => {
+
+        cursorGlow.style.left = e.clientX + "px";
+        cursorGlow.style.top = e.clientY + "px";
+
+      });
+
+    }
+
+
+    /* =======================================================
+       SCROLL REVEAL
+    ======================================================== */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              revealObserver.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.1
+        }
+      );
+
+    revealElements.forEach(element => {
+      revealObserver.observe(element);
+    });
+
+
+    /* =======================================================
+       ACTIVE NAVIGATION
+    ======================================================== */
+
+    const sections =
+      document.querySelectorAll("section[id]");
+
+    const navItems =
+      document.querySelectorAll(".nav-links a");
+
+    const sectionObserver =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              navItems.forEach(link => {
+                link.classList.remove("active");
+              });
+
+              const activeLink =
+                document.querySelector(
+                  `.nav-links a[href="#${entry.target.id}"]`
+                );
+
+              if (activeLink) {
+                activeLink.classList.add("active");
+              }
+
+            }
+
+          });
+
+        },
+        {
+          rootMargin: "-35% 0px -55% 0px"
+        }
+      );
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+
+    /* =======================================================
+       LOAD MORE
+    ======================================================== */
+
+    const loadMore =
+      document.getElementById("loadMore");
+
+    const hiddenItems =
+      document.querySelectorAll(".portfolio-item.hidden");
+
+    loadMore.addEventListener("click", () => {
+
+      hiddenItems.forEach(item => {
+        item.classList.remove("hidden");
+
+        setTimeout(() => {
+          item.classList.add("visible");
+        }, 50);
+      });
+
+      loadMore.style.display = "none";
+
+    });
+
+
+    /* =======================================================
+       PORTFOLIO LIGHTBOX
+    ======================================================== */
+
+    const lightbox =
+      document.getElementById("lightbox");
+
+    const lightboxImage =
+      document.getElementById("lightboxImage");
+
+    const lightboxClose =
+      document.getElementById("lightboxClose");
+
+    const lightboxPrev =
+      document.getElementById("lightboxPrev");
+
+    const lightboxNext =
+      document.getElementById("lightboxNext");
+
+    const zoomIn =
+      document.getElementById("zoomIn");
+
+    const zoomOut =
+      document.getElementById("zoomOut");
+
+    const zoomReset =
+      document.getElementById("zoomReset");
+
+    let currentIndex = 0;
+    let zoom = 1;
+
+    function getPortfolioItems() {
+
+      return Array.from(
+        document.querySelectorAll(
+          ".portfolio-item:not(.hidden)"
+        )
+      );
+
+    }
+
+    function openLightbox(index) {
+
+      const items = getPortfolioItems();
+
+      if (!items.length) return;
+
+      currentIndex = index;
+
+      const item = items[currentIndex];
+
+      const image =
+        item.querySelector("img");
+
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+
+      zoom = 1;
+      updateZoom();
+
+      lightbox.classList.add("active");
+
+      lightbox.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.style.overflow = "hidden";
+
+    }
+
+    function closeLightbox() {
+
+      lightbox.classList.remove("active");
+
+      lightbox.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      document.body.style.overflow = "";
+
+    }
+
+    function showNext() {
+
+      const items = getPortfolioItems();
+
+      currentIndex =
+        (currentIndex + 1) % items.length;
+
+      openLightbox(currentIndex);
+
+    }
+
+    function showPrevious() {
+
+      const items = getPortfolioItems();
+
+      currentIndex =
+        (currentIndex - 1 + items.length) %
+        items.length;
+
+      openLightbox(currentIndex);
+
+    }
+
+    function updateZoom() {
+
+      lightboxImage.style.transform =
+        `scale(${zoom})`;
+
+    }
+
+    document
+      .querySelectorAll(".portfolio-item")
+      .forEach((item, index) => {
+
+        item.addEventListener("click", () => {
+
+          const items = getPortfolioItems();
+
+          const realIndex =
+            items.indexOf(item);
+
+          openLightbox(realIndex);
+
+        });
+
+      });
+
+    lightboxClose.addEventListener(
+      "click",
+      closeLightbox
+    );
+
+    lightboxNext.addEventListener(
+      "click",
+      showNext
+    );
+
+    lightboxPrev.addEventListener(
+      "click",
+      showPrevious
+    );
+
+    zoomIn.addEventListener(
+      "click",
+      () => {
+
+        zoom = Math.min(zoom + 0.25, 3);
+
+        updateZoom();
+
+      }
+    );
+
+    zoomOut.addEventListener(
+      "click",
+      () => {
+
+        zoom = Math.max(zoom - 0.25, 0.5);
+
+        updateZoom();
+
+      }
+    );
+
+    zoomReset.addEventListener(
+      "click",
+      () => {
+
+        zoom = 1;
+
+        updateZoom();
+
+      }
+    );
+
+    lightbox.addEventListener(
+      "click",
+      e => {
+
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+
+      }
+    );
+
+
+    /* =======================================================
+       KEYBOARD CONTROLS
+    ======================================================== */
+
+    document.addEventListener(
+      "keydown",
+      e => {
+
+        if (
+          !lightbox.classList.contains("active")
+        ) {
+          return;
+        }
+
+        if (e.key === "Escape") {
+          closeLightbox();
+        }
+
+        if (e.key === "ArrowRight") {
+          showNext();
+        }
+
+        if (e.key === "ArrowLeft") {
+          showPrevious();
+        }
+
+        if (e.key === "+") {
+          zoom = Math.min(zoom + 0.25, 3);
+          updateZoom();
+        }
+
+        if (e.key === "-") {
+          zoom = Math.max(zoom - 0.25, 0.5);
+          updateZoom();
+        }
+
+      }
+    );
+
+
+    /* =======================================================
+       BEFORE / AFTER SLIDER
+    ======================================================== */
+
+    const comparisonRange =
+      document.getElementById(
+        "comparisonRange"
+      );
+
+    const afterImage =
+      document.getElementById(
+        "afterImage"
+      );
+
+    const comparisonSlider =
+      document.getElementById(
+        "comparisonSlider"
+      );
+
+    function updateComparison() {
+
+      const value =
+        comparisonRange.value;
+
+      afterImage.style.clipPath =
+        `inset(0 0 0 ${value}%)`;
+
+      comparisonSlider.style.left =
+        value + "%";
+
+    }
+
+    comparisonRange.addEventListener(
+      "input",
+      updateComparison
+    );
+
+    updateComparison();
+
+
+    /* =======================================================
+       BACK TO TOP
+    ======================================================== */
+
+    const backTop =
+      document.getElementById("backTop");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 700) {
+
+        backTop.classList.add("show");
+
+      } else {
+
+        backTop.classList.remove("show");
+
+      }
+
+    });
+
+    backTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* =======================================================
+       PREVENT IMAGE DRAGGING IN LIGHTBOX
+    ======================================================== */
+
+    lightboxImage.addEventListener(
+      "dragstart",
+      e => e.preventDefault()
+    );
+
+  </script>
+
+</body>
+</html>
